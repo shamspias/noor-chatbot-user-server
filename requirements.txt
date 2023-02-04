@@ -1,0 +1,17 @@
+django
+djangorestframework
+django-filter
+drf-yasg
+django-cors-headers
+djangorestframework-simplejwt
+django-rest-passwordreset
+rest-social-auth
+psycopg2-binary
+sentry-sdk
+gunicorn
+django-storages
+easy-thumbnails
+django-activity-stream
+python-dotenv
+boto3
+celery
