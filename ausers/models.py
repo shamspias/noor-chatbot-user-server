@@ -1,5 +1,4 @@
 import uuid
-import re
 from django.db import models
 from django.dispatch import receiver
 from django.contrib.auth.models import AbstractUser
@@ -7,8 +6,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from easy_thumbnails.fields import ThumbnailerImageField
 from django.urls import reverse
 from django_rest_passwordreset.signals import reset_password_token_created
-from easy_thumbnails.signals import saved_file
-from easy_thumbnails.signal_handlers import generate_aliases_global
 
 from common.helpers import build_absolute_uri
 from notifications.services import notify, ACTIVITY_USER_RESETS_PASS
