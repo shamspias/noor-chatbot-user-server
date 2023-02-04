@@ -43,7 +43,11 @@ class UserStatus(views.APIView):
     """
 
     def post(self, request, *args, **kwargs):
-        number = request.data.get('user_input')
+        """
+        :param request: phone_number
+        :return: string
+        """
+        number = request.data.get('phone_number')
         if User.objects.get(phone_number=number).exists():
             customer = User.objects.get(phone_number=number)
             if customer.check_user_status():
