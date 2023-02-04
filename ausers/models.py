@@ -66,6 +66,7 @@ class User(AbstractUser):
     profile_picture = ThumbnailerImageField('ProfilePicture', upload_to='profile_pictures/', blank=True, null=True)
     email = models.EmailField(_("email address"), unique=True)
     USERNAME_FIELD = 'email'
+    status = models.BooleanField(default=False)
     REQUIRED_FIELDS = []
 
     objects = UserManager()
@@ -80,3 +81,6 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    def check_user_status(self):
+        return self.status
