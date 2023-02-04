@@ -36,23 +36,18 @@ class UserViewSet(mixins.UpdateModelMixin, mixins.CreateModelMixin, viewsets.Gen
         except Exception as e:
             return Response({'error': 'Wrong auth token' + str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
+    @action(detail=False, methods=['get'], url_path='status', url_name='status')
+    def get_user_status(self, request):
 
-class UserStatus(views.APIView):
-    """
-    API View to check the user exists or is a paid user or not
-    """
-
-    def post(self, request, *args, **kwargs):
-        """
-        :param request: phone_number
-        :return: string
-        """
-        number = request.data.get('phone_number')
-        if User.objects.get(phone_number=number).exists():
-            customer = User.objects.get(phone_number=number)
-            if customer.check_user_status():
-                return Response({'status': 'paid'})
+        try:
+            number = request.GET.get("phone")
+            if User.objects.filter(phone_number=number).exists():
+                customer = User.objects.get(phone_number=number)
+                if customer.check_user_status():
+                    return Response({'status': 'paid'}, status=status.HTTP_200_OK)
+                else:
+                    return Response({'status': 'free'}, status=status.HTTP_200_OK)
             else:
-                return Response({'status': 'free'})
-        else:
-            return Response({'status': 'not exist'})
+                return Response({'status': 'not exist'}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': 'Wrong request' + str(e)}, status=status.HTTP_400_BAD_REQUEST)

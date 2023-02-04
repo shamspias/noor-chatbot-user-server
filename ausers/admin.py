@@ -17,6 +17,7 @@ class UserAdmin(UserAdmin):
                     'last_name',
                     'email',
                     'phone_number',
+                    'subscription_status',
                 )
             },
         ),
