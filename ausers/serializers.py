@@ -33,9 +33,6 @@ class CreateUserSerializer(serializers.ModelSerializer):
         # the password will be stored in plain text.
         user = User.objects.create_user(**validated_data)
 
-        # Create customer temporary until use signal
-        Customer.objects.create(user=user, sex=validated_data['sex'])
-
         return user
 
     class Meta:
