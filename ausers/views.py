@@ -1,4 +1,4 @@
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets, mixins, views
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -35,3 +35,20 @@ class UserViewSet(mixins.UpdateModelMixin, mixins.CreateModelMixin, viewsets.Gen
                             status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': 'Wrong auth token' + str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserStatus(views.APIView):
+    """
+    API View to check the user exists or is a paid user or not
+    """
+
+    def post(self, request, *args, **kwargs):
+        number = request.data.get('user_input')
+        if User.objects.get(phone_number=number).exists():
+            customer = User.objects.get(phone_number=number)
+            if customer.check_user_status():
+                return Response({'status': 'paid'})
+            else:
+                return Response({'status': 'free'})
+        else:
+            return Response({'status': 'not exist'})

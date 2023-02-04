@@ -1,7 +1,11 @@
 from rest_framework.routers import SimpleRouter
-
-from ausers.views import UserViewSet
+from django.urls import path
+from ausers.views import UserViewSet, UserStatus
 
 users_router = SimpleRouter()
 
 users_router.register(r'users', UserViewSet)
+
+urlpatterns = [
+    path('status/', UserStatus.as_view(), name="check-user"),
+]
