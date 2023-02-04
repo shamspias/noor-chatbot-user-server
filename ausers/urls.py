@@ -1,6 +1,6 @@
 from rest_framework.routers import SimpleRouter
 
-from ausers.views import UserViewSet, CustomerViewSet
+from ausers.views import UserViewSet
 
 users_router = SimpleRouter()
 

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 
-from ausers.models import User, Customer
+from ausers.models import User
 
 
 @admin.register(User)
@@ -25,5 +25,3 @@ class UserAdmin(UserAdmin):
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
 
-
-admin.site.register(Customer)

@@ -4,12 +4,11 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
 
-from ausers.models import User, Customer
+from ausers.models import User
 from ausers.permissions import IsUserOrReadOnly
 from ausers.serializers import (
     CreateUserSerializer,
     UserSerializer,
-    CustomerSerializer,
 )
 
 
@@ -36,4 +35,3 @@ class UserViewSet(mixins.UpdateModelMixin, mixins.CreateModelMixin, viewsets.Gen
                             status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': 'Wrong auth token' + str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
