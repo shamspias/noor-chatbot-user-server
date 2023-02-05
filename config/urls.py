@@ -16,9 +16,9 @@ from ausers.urls import users_router
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Custom chatbot user API",
+        title=settings.SWAGGER_TITLE,
         default_version='v1',
-        description="API for custom user chatbot",
+        description=settings.SWAGGER_DESCRIPTION,
         terms_of_service="https://github.com/shamspias",
         contact=openapi.Contact(email="shamspias0@gmail.com"),
         license=openapi.License(name="BSD License"),
