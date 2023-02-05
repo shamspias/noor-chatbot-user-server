@@ -43,11 +43,13 @@ class UserViewSet(mixins.UpdateModelMixin, mixins.CreateModelMixin, viewsets.Gen
             number = request.GET.get("phone")
             if User.objects.filter(phone_number=number).exists():
                 customer = User.objects.get(phone_number=number)
+                customer.number_of_text += 1
+                customer.save()
                 if customer.check_user_status():
-                    return Response({'status': 'paid'}, status=status.HTTP_200_OK)
+                    return Response({'status': 'paid', 'count': customer.number_of_text}, status=status.HTTP_200_OK)
                 else:
-                    return Response({'status': 'free'}, status=status.HTTP_200_OK)
+                    return Response({'status': 'free', 'count': customer.number_of_text}, status=status.HTTP_200_OK)
             else:
-                return Response({'status': 'not exist'}, status=status.HTTP_200_OK)
+                return Response({'status': 'not exist', 'count': 0}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': 'Wrong request' + str(e)}, status=status.HTTP_400_BAD_REQUEST)
