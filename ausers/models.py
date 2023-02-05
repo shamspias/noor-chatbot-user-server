@@ -62,11 +62,12 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    phone_number = models.CharField(_("phone number"), max_length=35, blank=True, null=True)
+    phone_number = models.CharField(_("phone number"), max_length=35, blank=True, null=True, unique=True)
     profile_picture = ThumbnailerImageField('ProfilePicture', upload_to='profile_pictures/', blank=True, null=True)
     email = models.EmailField(_("email address"), unique=True)
-    USERNAME_FIELD = 'email'
     subscription_status = models.BooleanField(default=False)
+    number_of_text = models.PositiveIntegerField(default=0)
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
