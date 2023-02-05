@@ -5,6 +5,7 @@ from .common import *  # noqa
 # https://docs.djangoproject.com/en/2.0/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS')
+CSRF_TRUSTED_ORIGINS = CSRF_TRUSTED_ORIGINS.split(',')
 INSTALLED_APPS += [
     "gunicorn",
     "storages",
