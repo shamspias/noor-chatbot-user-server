@@ -16,3 +16,4 @@ python-dotenv
 boto3
 celery
 channels
+stripe

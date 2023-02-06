@@ -230,7 +230,7 @@ REST_SOCIAL_DOMAIN_FROM_ORIGIN = True
 # Google
 SOCIAL_AUTH_GOOGLE_OAUTH_KEY = os.getenv('GOOGLE_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH_SECRET = os.getenv('GOOGLE_SECRET')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', ]  # optional
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'first_name', 'last_name']  # optional
 
 AUTHENTICATION_BACKENDS = (
     # 'social_core.backends.facebook.FacebookOAuth2',
@@ -364,3 +364,7 @@ SWAGGER_DESCRIPTION = os.getenv('API_SITE_DESCRIPTION')
 # RASA
 
 # RASA_API_URL = os.getenv('RASA_API_URL')
+
+# Stripe
+
+STRIPE_ENDPOINT_SECRET = os.getenv('STRIPE_ENDPOINT_SECRET')
