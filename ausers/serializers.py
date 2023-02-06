@@ -4,7 +4,7 @@ from ausers.models import User
 from common.serializers import ThumbnailerJSONSerializer
 
 
-class UserSerializer(serializers.ModelSerializer):
+class AuserSerializer(serializers.ModelSerializer):
     profile_picture = ThumbnailerJSONSerializer(required=False, allow_null=True, alias_target='users')
 
     class Meta:

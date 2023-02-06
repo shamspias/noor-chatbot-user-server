@@ -8,7 +8,7 @@ from ausers.models import User
 from ausers.permissions import IsUserOrReadOnly
 from ausers.serializers import (
     CreateUserSerializer,
-    UserSerializer,
+    AuserSerializer,
 )
 
 
@@ -18,7 +18,7 @@ class UserViewSet(mixins.UpdateModelMixin, mixins.CreateModelMixin, viewsets.Gen
     """
 
     queryset = User.objects.all()
-    serializers = {'default': UserSerializer, 'create': CreateUserSerializer}
+    serializers = {'default': AuserSerializer, 'create': CreateUserSerializer}
     permissions = {'default': (IsUserOrReadOnly,), 'create': (AllowAny,)}
 
     def get_serializer_class(self):
