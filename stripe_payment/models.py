@@ -15,6 +15,7 @@ class Subscription(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     active = models.BooleanField(default=True)
     payment_status = models.BooleanField(default=False)
+    stripe_id = models.CharField(max_length=250, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         # Check if the subscription has ended
