@@ -67,6 +67,7 @@ class User(AbstractUser):
     email = models.EmailField(_("email address"), unique=True)
     subscription_status = models.BooleanField(default=False)
     number_of_text = models.PositiveIntegerField(default=0)
+    stripe_id = models.CharField(max_length=250, blank=True, null=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
