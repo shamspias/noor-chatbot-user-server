@@ -31,7 +31,7 @@ class UserViewSet(mixins.UpdateModelMixin, mixins.CreateModelMixin, viewsets.Gen
     @action(detail=False, methods=['get'], url_path='info', url_name='info')
     def get_user_data(self, instance):
         try:
-            return Response(UserSerializer(self.request.user, context={'request': self.request}).data,
+            return Response(AuserSerializer(self.request.user, context={'request': self.request}).data,
                             status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': 'Wrong auth token' + str(e)}, status=status.HTTP_400_BAD_REQUEST)
