@@ -5,7 +5,7 @@ drf-yasg
 django-cors-headers
 djangorestframework-simplejwt
 django-rest-passwordreset
-rest-social-auth
+drf_social_oauth2
 psycopg2-binary
 sentry-sdk
 gunicorn
