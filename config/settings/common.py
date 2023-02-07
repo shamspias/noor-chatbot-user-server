@@ -32,6 +32,7 @@ THIRD_PARTY_APPS = [
     'channels',
     'corsheaders',  # Cross Origin
     'easy_thumbnails',  # image lib
+    'rest_framework.authtoken',  # Token authentication
     'social_django',  # django social auth
     'rest_social_auth',  # this package
 
