@@ -67,8 +67,16 @@ class DeleteConversationalHistoryApiView(views.APIView):
     API View to delete all the conversation history
     """
 
-    def get(self, request):
-        ConversationHistory.objects.filter(user=request.user).delete()
+    def post(self, request):
+        """
+        Send phone number to delete all conversation
+        example:
+        {
+            "number": "+8801784056345",
+        }
+        """
+        number = request.data.get('number')
+        ConversationHistory.objects.filter(phone_number__number=number).delete()
         return Response({"message": "Deleted"}, status=status.HTTP_200_OK)
 
 
@@ -120,3 +128,6 @@ class TrackConversationHistory(views.APIView):
                                                               user_input=user_input)
             conversation.save()
         return Response({"prompt": chatbot_prompt, "conversation_id": conversation_id}, status=status.HTTP_200_OK)
+
+    def get(self, request):
+        return Response({"data": "Hi"}, status=status.HTTP_200_OK)
