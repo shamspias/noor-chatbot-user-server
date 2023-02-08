@@ -68,6 +68,7 @@ class DeleteConversationalHistoryApiView(views.APIView):
     """
     API View to delete all the conversation history
     """
+    permission_classes = (AllowAny,)
 
     def post(self, request):
         """
@@ -90,6 +91,7 @@ class TrackConversationHistory(views.APIView):
     """
     API view to Track the conversation history and save
     """
+    permission_classes = (AllowAny,)
 
     def post(self, request):
         """
