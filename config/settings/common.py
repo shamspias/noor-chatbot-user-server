@@ -224,10 +224,10 @@ LOGGING = {
 AUTH_USER_MODEL = os.getenv('AUTH_USER_MODEL', 'ausers.User')
 
 # Social login
-SOCIAL_AUTH_JSONFIELD_ENABLED = True
-
-REST_SOCIAL_OAUTH_REDIRECT_URI = '/'
-REST_SOCIAL_DOMAIN_FROM_ORIGIN = True
+# SOCIAL_AUTH_JSONFIELD_ENABLED = True
+#
+# REST_SOCIAL_OAUTH_REDIRECT_URI = '/'
+# REST_SOCIAL_DOMAIN_FROM_ORIGIN = True
 
 # Facebook
 # SOCIAL_AUTH_FACEBOOK_KEY = os.getenv('FACEBOOK_KEY')
@@ -266,7 +266,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
+        # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
         # 'drf_social_oauth2.authentication.SocialAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
