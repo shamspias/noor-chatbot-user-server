@@ -41,6 +41,7 @@ class UserViewSet(mixins.UpdateModelMixin, mixins.CreateModelMixin, viewsets.Gen
 
         try:
             number = request.GET.get("phone")
+            number = "+" + number
             if User.objects.filter(phone_number=number).exists():
                 customer = User.objects.get(phone_number=number)
                 none_exist_number, _created = NoneExistNumbers.objects.get_or_create(number=number, is_user=True)
