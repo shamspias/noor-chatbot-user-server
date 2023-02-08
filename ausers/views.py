@@ -76,7 +76,7 @@ class DeleteConversationalHistoryApiView(views.APIView):
         }
         """
         number = request.data.get('number')
-        ConversationHistory.objects.filter(phone_number__number=number).delete()
+        ConversationHistory.objects.filter(phone_number=number).delete()
         return Response({"message": "Deleted"}, status=status.HTTP_200_OK)
 
 
@@ -103,7 +103,7 @@ class TrackConversationHistory(views.APIView):
 
         # get last 15 conversation and pass to chatbot response
         chatbot_prompt = ""
-        conversations = ConversationHistory.objects.filter(phone_number__number=number).order_by('-created_at')[:15]
+        conversations = ConversationHistory.objects.filter(phone_number=number).order_by('-created_at')[:15]
         for conversation in conversations:
             if conversation.user_input is None:
                 conversation.user_input = ""
@@ -115,7 +115,7 @@ class TrackConversationHistory(views.APIView):
 
         # save the user input into database
         try:
-            last_conversation = ConversationHistory.objects.filter(phone_number__number=number).latest(
+            last_conversation = ConversationHistory.objects.filter(phone_number=number).latest(
                 'conversation_id')
             conversation_id = last_conversation.conversation_id
             conversation_id += 1
@@ -123,7 +123,7 @@ class TrackConversationHistory(views.APIView):
             conversation_id = 0
 
         if user_input:
-            conversation = ConversationHistory.objects.create(phone_number__number=number,
+            conversation = ConversationHistory.objects.create(phone_number=number,
                                                               conversation_id=conversation_id,
                                                               user_input=user_input)
             conversation.save()
