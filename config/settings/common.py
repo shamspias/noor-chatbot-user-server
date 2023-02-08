@@ -36,9 +36,9 @@ THIRD_PARTY_APPS = [
     'corsheaders',  # Cross Origin
     'easy_thumbnails',  # image lib
     'rest_framework.authtoken',  # Token authentication
-    'oauth2_provider',
-    'social_django',  # django social auth
-    'drf_social_oauth2',  # this package
+    # 'oauth2_provider',
+    # 'social_django',  # django social auth
+    # 'drf_social_oauth2',  # this package
 
 ]
 
@@ -84,8 +84,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
+                # 'social_django.context_processors.backends',
+                # 'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -236,18 +236,18 @@ REST_SOCIAL_DOMAIN_FROM_ORIGIN = True
 # SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'ru_RU'}  # optional
 
 # Google
-SOCIAL_AUTH_GOOGLE_OAUTH_KEY = os.getenv('GOOGLE_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH_SECRET = os.getenv('GOOGLE_SECRET')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
-    'https://www.googleapis.com/auth/userinfo.email',
-    'https://www.googleapis.com/auth/userinfo.profile',
-]
+# SOCIAL_AUTH_GOOGLE_OAUTH_KEY = os.getenv('GOOGLE_KEY')
+# SOCIAL_AUTH_GOOGLE_OAUTH_SECRET = os.getenv('GOOGLE_SECRET')
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+#     'https://www.googleapis.com/auth/userinfo.email',
+#     'https://www.googleapis.com/auth/userinfo.profile',
+# ]
 
 AUTHENTICATION_BACKENDS = (
-    'drf_social_oauth2.backends.DjangoOAuth2',
-    # 'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.google.GoogleOAuth2',
-    # and maybe some others ...
+    # 'drf_social_oauth2.backends.DjangoOAuth2',
+    # # 'social_core.backends.facebook.FacebookOAuth2',
+    # 'social_core.backends.google.GoogleOAuth2',
+    # # and maybe some others ...
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -267,7 +267,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
-        'drf_social_oauth2.authentication.SocialAuthentication',
+        # 'drf_social_oauth2.authentication.SocialAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
