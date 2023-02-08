@@ -96,6 +96,7 @@ class TrackConversationHistory(views.APIView):
         }
         """
         number = request.data.get('number')
+        number_obj = NoneExistNumbers.objects.get(number=number)
         user_input = request.data.get('user_input')
         end_param = request.data.get('end_param', 'bot')
         if user_input is None:
@@ -103,7 +104,7 @@ class TrackConversationHistory(views.APIView):
 
         # get last 15 conversation and pass to chatbot response
         chatbot_prompt = ""
-        conversations = ConversationHistory.objects.filter(phone_number=number).order_by('-created_at')[:15]
+        conversations = ConversationHistory.objects.filter(phone_number=number_obj).order_by('-created_at')[:15]
         for conversation in conversations:
             if conversation.user_input is None:
                 conversation.user_input = ""
@@ -115,7 +116,7 @@ class TrackConversationHistory(views.APIView):
 
         # save the user input into database
         try:
-            last_conversation = ConversationHistory.objects.filter(phone_number=number).latest(
+            last_conversation = ConversationHistory.objects.filter(phone_number=number_obj).latest(
                 'conversation_id')
             conversation_id = last_conversation.conversation_id
             conversation_id += 1
@@ -123,7 +124,7 @@ class TrackConversationHistory(views.APIView):
             conversation_id = 0
 
         if user_input:
-            conversation = ConversationHistory.objects.create(phone_number=number,
+            conversation = ConversationHistory.objects.create(phone_number=number_obj,
                                                               conversation_id=conversation_id,
                                                               user_input=user_input)
             conversation.save()
