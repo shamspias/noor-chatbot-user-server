@@ -144,3 +144,31 @@ class TrackConversationHistory(views.APIView):
             "user_input": "Hey there! how are you",
             "end_param": "bot:",
         }, status=status.HTTP_200_OK)
+
+
+class UpdateTrackConversationHistory(views.APIView):
+    """
+    API view to add replay from chatbot
+    """
+
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        """
+        example:
+        {
+            "number": "+8801784056345",
+            "bot_replay": "Hey there! how are you",
+            "conversation_id" 1
+        }
+        """
+        number = request.data.get('number')
+        conversation_id = request.data.get('conversation_id')
+        bot_replay = request.data.get('bot_replay')
+
+        phone_obj = NoneExistNumbers.objects.get(number=number)
+
+        conversation_obj = ConversationHistory.objects.get(phone_number=phone_obj, conversation_id=conversation_id)
+        conversation_obj.chatbot_response = bot_replay
+        conversation_obj.save()
+        return Response({"message": "success"}, status=status.HTTP_200_OK)
