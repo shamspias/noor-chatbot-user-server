@@ -36,12 +36,16 @@ class UserViewSet(mixins.UpdateModelMixin, mixins.CreateModelMixin, viewsets.Gen
         except Exception as e:
             return Response({'error': 'Wrong auth token' + str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-    @action(detail=False, methods=['get'], url_path='status', url_name='status')
+    @action(detail=False, methods=['post'], url_path='status', url_name='status')
     def get_user_status(self, request):
+        """
+        {
+            "phone": "+8801784056345"
+        }
+        """
 
         try:
-            number = request.GET.get("phone")
-            number = "+" + number
+            number = request.data.get('number')
             if User.objects.filter(phone_number=number).exists():
                 customer = User.objects.get(phone_number=number)
                 none_exist_number, _created = NoneExistNumbers.objects.get_or_create(number=number, is_user=True)
