@@ -12,9 +12,12 @@ class AuserSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'username',
+            'email',
             'first_name',
             'last_name',
             'phone_number',
+            'stripe_id',
+            'subscription_status',
             'profile_picture',
         )
         read_only_fields = ('username', 'email',)
@@ -45,6 +48,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'sex',
+            'stripe_id',
             'tokens',
             'profile_picture',
         )
