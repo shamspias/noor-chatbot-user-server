@@ -66,7 +66,6 @@ class User(AbstractUser):
     profile_picture = ThumbnailerImageField('ProfilePicture', upload_to='profile_pictures/', blank=True, null=True)
     email = models.EmailField(_("email address"), unique=True)
     subscription_status = models.BooleanField(default=False)
-    number_of_text = models.PositiveIntegerField(default=0)
     stripe_id = models.CharField(max_length=250, blank=True, null=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -86,3 +85,42 @@ class User(AbstractUser):
 
     def check_user_status(self):
         return self.subscription_status
+
+
+class NoneExistNumbers(models.Model):
+    """
+    model that contain numbers
+    """
+    number = models.CharField(max_length=50, blank=True, null=True)
+    is_user = models.BooleanField(default=False)
+    text_count = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.number
+
+
+class ConversationHistory(models.Model):
+    """
+    To store the conversation history
+    """
+    phone_number = models.ForeignKey(NoneExistNumbers, on_delete=models.CASCADE)
+    conversation_id = models.PositiveIntegerField(default=0)
+    user_input = models.TextField(blank=True, null=True)
+    chatbot_response = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created_at',)
+
+    def __str__(self):
+        return self.phone_number.number
+
+    def last_conversation_id(self):
+        """
+        to retrieve the last conversation id
+        """
+        try:
+            last_conversation = self.objects.latest('conversation_id')
+            return last_conversation.conversation_id
+        except self.DoesNotExist:
+            return None
