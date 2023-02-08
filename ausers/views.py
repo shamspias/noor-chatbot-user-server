@@ -130,4 +130,8 @@ class TrackConversationHistory(views.APIView):
         return Response({"prompt": chatbot_prompt, "conversation_id": conversation_id}, status=status.HTTP_200_OK)
 
     def get(self, request):
-        return Response({"data": "Hi"}, status=status.HTTP_200_OK)
+        return Response({
+            "number": "+8801784056345",
+            "user_input": "Hey there! how are you",
+            "end_param": "bot:",
+        }, status=status.HTTP_200_OK)
