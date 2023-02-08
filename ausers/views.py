@@ -49,7 +49,7 @@ class UserViewSet(mixins.UpdateModelMixin, mixins.CreateModelMixin, viewsets.Gen
             if User.objects.filter(phone_number=number).exists():
                 customer = User.objects.get(phone_number=number)
                 none_exist_number, _created = NoneExistNumbers.objects.get_or_create(number=number, is_user=True)
-                print(none_exist_number.text)
+                print(none_exist_number.text_count)
                 none_exist_number.text_count += 1
                 none_exist_number.save()
                 if customer.check_user_status():
