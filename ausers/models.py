@@ -96,7 +96,10 @@ class NoneExistNumbers(models.Model):
     text_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.number
+        if self.number is not None:
+            return self.number
+        else:
+            return "No number"
 
 
 class ConversationHistory(models.Model):
