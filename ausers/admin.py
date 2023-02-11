@@ -37,5 +37,5 @@ class NoneExistNumberAdmin(admin.ModelAdmin):
     list_display = ("number", "is_user", "text_count")
 
 
-admin.site.register(NoneExistNumbers)
+admin.site.register(NoneExistNumbers, NoneExistNumberAdmin)
 admin.site.register(ConversationHistory)
