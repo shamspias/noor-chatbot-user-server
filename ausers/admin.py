@@ -29,5 +29,13 @@ class UserAdmin(UserAdmin):
     list_display = ("email", "first_name", "last_name", "stripe_id", "subscription_status")
 
 
+class NoneExistNumberAdmin(admin.ModelAdmin):
+    """
+    Admin functionality for None Exist Number
+    """
+
+    list_display = ("number", "is_user", "text_count")
+
+
 admin.site.register(NoneExistNumbers)
 admin.site.register(ConversationHistory)
