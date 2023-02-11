@@ -49,16 +49,16 @@ class UserViewSet(mixins.UpdateModelMixin, mixins.CreateModelMixin, viewsets.Gen
                 none_exist_number.text_count += 1
                 none_exist_number.save()
                 if customer.check_user_status():
-                    return Response({'status': 'paid', 'count': none_exist_number.text_count},
+                    return Response({'status': 'paid', 'count': none_exist_number.text_count, 'new': _created},
                                     status=status.HTTP_200_OK)
                 else:
-                    return Response({'status': 'free', 'count': none_exist_number.text_count},
+                    return Response({'status': 'free', 'count': none_exist_number.text_count, 'new': _created},
                                     status=status.HTTP_200_OK)
             else:
                 none_exist_number, _created = NoneExistNumbers.objects.get_or_create(number=number)
                 none_exist_number.text_count += 1
                 none_exist_number.save()
-                return Response({'status': 'not exist', 'count': none_exist_number.text_count},
+                return Response({'status': 'not exist', 'count': none_exist_number.text_count, 'new': _created},
                                 status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': 'Wrong request' + str(e)}, status=status.HTTP_400_BAD_REQUEST)
