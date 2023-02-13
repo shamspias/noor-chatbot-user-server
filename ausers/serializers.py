@@ -25,7 +25,7 @@ class AuserSerializer(serializers.ModelSerializer):
 
 class CreateUserSerializer(serializers.ModelSerializer):
     profile_picture = ThumbnailerJSONSerializer(required=False, allow_null=True, alias_target='users')
-    sex = serializers.CharField(max_length=15, allow_blank=True, required=False)
+    # sex = serializers.CharField(max_length=15, allow_blank=True, required=False)
     tokens = serializers.SerializerMethodField()
 
     def get_tokens(self, user):
@@ -47,7 +47,6 @@ class CreateUserSerializer(serializers.ModelSerializer):
             'password',
             'first_name',
             'last_name',
-            'sex',
             'stripe_id',
             'tokens',
             'profile_picture',
