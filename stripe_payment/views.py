@@ -21,6 +21,8 @@ def create_user_from_stripe(obj):
 
 @csrf_exempt
 def stripe_webhook(request):
+    if request.method == 'GET':
+        return HttpResponse(status=400)
     if request.method == 'POST':
         payload = request.body
         sig_header = request.META['HTTP_STRIPE_SIGNATURE']
