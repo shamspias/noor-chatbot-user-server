@@ -11,10 +11,10 @@ def create_user_from_stripe(obj):
     create user
     :return: user instance
     """
-    email = obj['billing_details']['email']
-    phone = obj['billing_details']['phone']
-    name = obj['billing_details']['name']
-    stripe_id = obj['billing_details']['id']
+    email = obj['email']
+    phone = obj['phone']
+    name = obj['name']
+    stripe_id = obj['id']
     return User.objects.create_user(email=email, password="123456789", phone_number=phone, first_name=name,
                                     stripe_id=stripe_id)
 
@@ -52,12 +52,11 @@ def stripe_webhook(request):
 
         elif event['type'] == 'customer.created' or event['type'] == 'customer.updated':
             customer = event['data']['object']
-            print(customer)
             # Get the email address
-            email = customer['billing_details']['email']
-            phone = customer['billing_details']['phone']
-            name = customer['billing_details']['name']
-            stripe_id = customer['billing_details']['id']
+            email = customer['email']
+            phone = customer['phone']
+            name = customer['name']
+            stripe_id = customer['id']
             # Get the user from the database
             if User.objects.filter(email=email).exists():
                 user = User.objects.get(email=email)
@@ -71,14 +70,14 @@ def stripe_webhook(request):
 
         elif event['type'] == 'customer.deleted':
             customer = event['data']['object']
-            email = customer['billing_details']['email']
+            email = customer['email']
             if User.objects.filter(email=email).exists():
                 user = User.objects.get(email=email)
                 user.delete()
 
         elif event['type'] == 'customer.subscription.created' or event['type'] == 'customer.subscription.resumed':
             subscription = event['data']['object']
-            email = subscription['billing_details']['email']
+            email = subscription['email']
             if User.objects.filter(email=email).exists():
                 user = User.objects.get(email=email)
                 # Update the payment status of the user
@@ -91,7 +90,7 @@ def stripe_webhook(request):
 
         elif event['type'] == 'customer.subscription.deleted' or event['type'] == 'customer.subscription.paused':
             subscription = event['data']['object']
-            email = subscription['billing_details']['email']
+            email = subscription['email']
             if User.objects.filter(email=email).exists():
                 user = User.objects.get(email=email)
                 # Update the payment status of the user
