@@ -24,6 +24,7 @@ def stripe_webhook(request):
     if request.method == 'GET':
         return HttpResponse(status=400)
     if request.method == 'POST':
+        print("Enter Post")
         payload = request.body
         sig_header = request.META['HTTP_STRIPE_SIGNATURE']
         endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
@@ -49,6 +50,7 @@ def stripe_webhook(request):
 
         elif event['type'] == 'customer.created' or event['type'] == 'customer.updated':
             customer = event['data']['object']
+            print(customer)
             # Get the email address
             email = customer['billing_details']['email']
             phone = customer['billing_details']['phone']
