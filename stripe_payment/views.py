@@ -24,7 +24,6 @@ def stripe_webhook(request):
     if request.method == 'GET':
         return HttpResponse(status=400)
     if request.method == 'POST':
-        print("Enter Post")
         payload = request.body
         sig_header = request.META['HTTP_STRIPE_SIGNATURE']
         endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
@@ -34,6 +33,7 @@ def stripe_webhook(request):
             event = stripe.Webhook.construct_event(
                 payload, sig_header, endpoint_secret
             )
+            print(event['type'])
         except ValueError as e:
             # Invalid payload
             return HttpResponse(status=400)
