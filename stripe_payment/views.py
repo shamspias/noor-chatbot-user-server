@@ -16,7 +16,7 @@ def create_user_from_stripe(obj):
     name = obj['name']
     stripe_id = obj['id']
     return User.objects.create_user(email=email, password="123456789", phone_number=phone, first_name=name,
-                                    stripe_id=stripe_id)
+                                    stripe_id=stripe_id, subscription_status=True)
 
 
 @csrf_exempt
@@ -64,6 +64,7 @@ def stripe_webhook(request):
                 user.phone_number = phone
                 user.first_name = name
                 user.stripe_id = stripe_id
+                user.subscription_status = True
                 user.save()
             else:
                 create_user_from_stripe(customer)
@@ -75,7 +76,7 @@ def stripe_webhook(request):
                 user = User.objects.get(email=email)
                 user.delete()
 
-        if event['type'] == 'customer.subscription.created' or event['type'] == 'customer.subscription.resumed':
+        elif event['type'] == 'customer.subscription.created' or event['type'] == 'customer.subscription.resumed':
             subscription = event['data']['object']
             email = subscription['email']
             if User.objects.filter(email=email).exists():
