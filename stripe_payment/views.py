@@ -75,7 +75,7 @@ def stripe_webhook(request):
                 user = User.objects.get(email=email)
                 user.delete()
 
-        elif event['type'] == 'customer.subscription.created' or event['type'] == 'customer.subscription.resumed':
+        if event['type'] == 'customer.subscription.created' or event['type'] == 'customer.subscription.resumed':
             subscription = event['data']['object']
             email = subscription['email']
             if User.objects.filter(email=email).exists():
