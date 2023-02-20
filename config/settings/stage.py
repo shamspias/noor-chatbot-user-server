@@ -24,3 +24,16 @@ DATABASES = {
 
 # Social
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+
+# Statics
+STATIC_ROOT = os.getenv('STATIC_ROOT_PATH')
+MEDIA_ROOT = os.getenv('MEDIA_ROOT_PATH')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+
+# Static files (CSS, JavaScript, Images)
+
+STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
