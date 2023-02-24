@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 
-from ausers.models import User, NoneExistNumbers
+from ausers.models import User, NoneExistNumbers, ConversationHistory
 
 
 @admin.register(User)
@@ -38,4 +38,4 @@ class NoneExistNumberAdmin(admin.ModelAdmin):
 
 
 admin.site.register(NoneExistNumbers, NoneExistNumberAdmin)
-# admin.site.register(ConversationHistory)
+admin.site.register(ConversationHistory)
