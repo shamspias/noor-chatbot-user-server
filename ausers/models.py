@@ -95,6 +95,10 @@ class NoneExistNumbers(models.Model):
     is_user = models.BooleanField(default=False)
     text_count = models.PositiveIntegerField(default=0)
 
+    class Meta:
+        verbose_name = 'None Exist Number'
+        verbose_name_plural = 'None Exist Numbers'
+
     def __str__(self):
         if self.number is not None:
             return self.number
@@ -113,6 +117,8 @@ class ConversationHistory(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        verbose_name = 'Conversation History'
+        verbose_name_plural = 'Conversation History'
         ordering = ('-created_at',)
 
     def __str__(self):
