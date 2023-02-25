@@ -96,8 +96,8 @@ class NoneExistNumbers(models.Model):
     text_count = models.PositiveIntegerField(default=0)
 
     class Meta:
-        verbose_name = 'None Exist Number'
-        verbose_name_plural = 'None Exist Numbers'
+        verbose_name = 'New Number'
+        verbose_name_plural = 'New Numbers'
 
     def __str__(self):
         if self.number is not None:
