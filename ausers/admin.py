@@ -1,12 +1,20 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
-
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from ausers.models import User, NoneExistNumbers, ConversationHistory
+
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name')
 
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
+    add_form = CustomUserCreationForm
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (
