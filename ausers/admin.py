@@ -37,7 +37,7 @@ class UserAdmin(UserAdmin):
     #     (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     # )
     search_fields = ('email', 'stripe_id')
-    list_display = ("email", "first_name", "last_name", "stripe_id", "subscription_status")
+    list_display = ("email", "first_name", "phone_number", "stripe_id", "subscription_status")
 
     def get_form(self, request, obj=None, **kwargs):
         """
