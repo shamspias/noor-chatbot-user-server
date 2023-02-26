@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.forms import EmailField
 from ausers.models import User, NoneExistNumbers, ConversationHistory
 
@@ -10,8 +9,8 @@ from ausers.models import User, NoneExistNumbers, ConversationHistory
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ("email",)
-        field_classes = {"email": EmailField}
+        fields = ("email", "username")
+        field_classes = {"email": EmailField, "username": UsernameField}
 
 
 @admin.register(User)
