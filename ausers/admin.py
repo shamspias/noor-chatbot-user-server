@@ -9,11 +9,12 @@ from ausers.models import User, NoneExistNumbers, ConversationHistory
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name')
+        fields = ("email",)
 
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
+    form = CustomUserCreationForm
     add_form = CustomUserCreationForm
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
