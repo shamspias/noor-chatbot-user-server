@@ -6,17 +6,17 @@ from django.forms import EmailField
 from ausers.models import User, NoneExistNumbers, ConversationHistory
 
 
-class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ("email", "username")
-        field_classes = {"email": EmailField, "username": UsernameField}
+# class CustomUserCreationForm(UserCreationForm):
+#     class Meta:
+#         model = User
+#         fields = ("email", "username")
+#         field_classes = {"email": EmailField, "username": UsernameField}
 
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
-    form = CustomUserCreationForm
-    add_form = CustomUserCreationForm
+    # form = CustomUserCreationForm
+    # add_form = CustomUserCreationForm
     # fieldsets = (
     #     (None, {'fields': ('username', 'password')}),
     #     (
