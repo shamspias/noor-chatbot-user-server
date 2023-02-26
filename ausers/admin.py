@@ -18,26 +18,33 @@ class CustomUserCreationForm(UserCreationForm):
 class UserAdmin(UserAdmin):
     form = CustomUserCreationForm
     add_form = CustomUserCreationForm
-    fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        (
-            _('Personal info'),
-            {
-                'fields': (
-                    'first_name',
-                    'last_name',
-                    'email',
-                    'phone_number',
-                    'subscription_status',
-                    'stripe_id',
-                )
-            },
-        ),
-        (_('Profile image'), {'fields': ('profile_picture',)}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
-    )
+    # fieldsets = (
+    #     (None, {'fields': ('username', 'password')}),
+    #     (
+    #         _('Personal info'),
+    #         {
+    #             'fields': (
+    #                 'first_name',
+    #                 'last_name',
+    #                 'email',
+    #                 'phone_number',
+    #                 'subscription_status',
+    #                 'stripe_id',
+    #             )
+    #         },
+    #     ),
+    #     (_('Profile image'), {'fields': ('profile_picture',)}),
+    #     (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+    #     (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+    # )
+    search_fields = ('email', 'stripe_id')
     list_display = ("email", "first_name", "last_name", "stripe_id", "subscription_status")
+
+    def get_form(self, request, obj=None, **kwargs):
+        """
+        Use special form during user creation
+        """
+        return self.form
 
 
 class NoneExistNumberAdmin(admin.ModelAdmin):
