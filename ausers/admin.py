@@ -30,12 +30,6 @@ class UserAdmin(UserAdmin):
     search_fields = ('email', 'stripe_id', 'phone_number')
     list_display = ("email", "first_name", "phone_number", "stripe_id", "subscription_status")
 
-    def get_form(self, request, obj=None, **kwargs):
-        """
-        Use special form during user creation
-        """
-        return self.form
-
 
 class NoneExistNumberAdmin(admin.ModelAdmin):
     """
