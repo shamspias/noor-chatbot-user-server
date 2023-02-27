@@ -17,25 +17,25 @@ from ausers.models import User, NoneExistNumbers, ConversationHistory
 class UserAdmin(UserAdmin):
     # form = CustomUserCreationForm
     # add_form = CustomUserCreationForm
-    # fieldsets = (
-    #     (None, {'fields': ('username', 'password')}),
-    #     (
-    #         _('Personal info'),
-    #         {
-    #             'fields': (
-    #                 'first_name',
-    #                 'last_name',
-    #                 'email',
-    #                 'phone_number',
-    #                 'subscription_status',
-    #                 'stripe_id',
-    #             )
-    #         },
-    #     ),
-    #     (_('Profile image'), {'fields': ('profile_picture',)}),
-    #     (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-    #     (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
-    # )
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        (
+            _('Personal info'),
+            {
+                'fields': (
+                    'first_name',
+                    'last_name',
+                    'email',
+                    'phone_number',
+                    'subscription_status',
+                    'stripe_id',
+                )
+            },
+        ),
+        (_('Profile image'), {'fields': ('profile_picture',)}),
+        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+    )
     search_fields = ('email', 'stripe_id', 'phone_number')
     list_display = ("email", "first_name", "phone_number", "stripe_id", "subscription_status")
 
