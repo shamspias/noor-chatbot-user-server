@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import ReligiousFiles, PrayerList
 
-# Register your models here.
+admin.site.register(ReligiousFiles)
+admin.site.register(PrayerList)
