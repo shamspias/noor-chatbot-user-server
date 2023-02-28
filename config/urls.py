@@ -38,7 +38,7 @@ urlpatterns = [
                   # api
                   path('api/v1/', include(router.urls)),
                   path('api/v1/conversation/', include('ausers.urls')),
-                  path('api/v1/', include('stripe_payment.urls')),
+                  # path('api/v1/', include('stripe_payment.urls')),
                   # auth
                   path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
                   path('api/v1/auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
