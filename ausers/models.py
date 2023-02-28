@@ -6,6 +6,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from easy_thumbnails.fields import ThumbnailerImageField
 from django.urls import reverse
 from django_rest_passwordreset.signals import reset_password_token_created
+from django.utils import timezone
 
 from common.helpers import build_absolute_uri
 from notifications.services import notify, ACTIVITY_USER_RESETS_PASS
@@ -67,6 +68,7 @@ class User(AbstractUser):
     email = models.EmailField(_("email address"), unique=True)
     subscription_status = models.BooleanField(default=False)
     stripe_id = models.CharField(max_length=250, blank=True, null=True)
+    user_time_zone = models.DateField(default=timezone.now())
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
