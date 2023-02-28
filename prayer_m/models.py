@@ -5,7 +5,16 @@ class PrayerList(models.Model):
     """
     List of prayers
     """
-    pass
+    name = models.CharField(max_length=250, blank=True, null=True)
+    time_of_prayer = models.CharField(max_length=250, blank=True, null=True)
+    details = models.CharField(max_length=250, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Prayer"
+        verbose_name_plural = "Prayers"
+
+    def __str__(self):
+        return self.name
 
 
 class ReligiousFiles(models.Model):
@@ -20,3 +29,6 @@ class ReligiousFiles(models.Model):
     class Meta:
         verbose_name = "Islamic Contain"
         verbose_name_plural = "Islamic Contains"
+
+    def __str__(self):
+        return self.title
